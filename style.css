@@ -6,14 +6,23 @@ input[type="radio"] {
   top: -9999em;
 }
 
+
+body
+{
+  background-image: url(img/back-img.jpg);  
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
 html, body {
   font-family: Mandali, Arial, sans-serif;
   font-size: 16px;
+  
 }
 
 .center {
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -25,6 +34,7 @@ html, body {
 
 }
 #board {
+  
   width: 50vmin;
   height: 50vmin;
   display: grid;
@@ -45,7 +55,7 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0,0,0,0.10);
+  background: rgba(243, 240, 240, 0.129);
   font-family: Raleway, Courier, 'Courier New', Sans, sans-serif;
   font-weight: bolder;
 
@@ -103,4 +113,23 @@ input
     
     font-size: 40px;
     text-align: center;
+}
+
+
+
+#user-name,#opp-name
+{
+  border: transparent;
+  border-radius: 30px;
+  background: rgba(243, 240, 240, 0.129);
+  padding: 0px 5px;
+}
+#user-name::placeholder,#opp-name::placeholder
+{
+  color: white;
+  padding: 10px;
+}
+#user-name:focus,#opp-name:focus
+{
+  outline: none;
 }
