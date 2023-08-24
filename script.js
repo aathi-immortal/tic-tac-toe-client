@@ -66,7 +66,7 @@ function updateMark(index, mark) {
     
     tileDiv.textContent = mark;
     chanceX = !chanceX;
-    this.isEmptybox = false;
+    buttons[index].isEmptybox = false;
      // Update the text content
      
 }
