@@ -45,6 +45,15 @@ function connect()
             updateMark(blockId,symbol);
             
         });
+        stomp.subscribe("/user/" + receiverName+ "/game/private",function(frame)
+        {
+            
+            let message = JSON.parse(frame.body);
+            let symbol = message.messageContent;
+            let blockId = message.bodyId;
+            updateMark(blockId,symbol);
+            
+        });
     });
 }
 
@@ -87,12 +96,12 @@ function addEventListenerToAllButtons()
                     
                     let symbol = "O";
                     if(chanceX){
-                        updateMark(index,'X');
+                        // updateMark(index,'X');
                         symbol = "X"
                     }
                     else
                     {
-                        updateMark(index,'O');
+                        // updateMark(index,'O');
                     }
                     // send the changes into server using socket connection
                     
