@@ -36,7 +36,7 @@ function connect()
         });
 
         // private
-        stomp.subscribe("/user/" + receiverName+ "/game/private",function(frame)
+        stomp.subscribe("/user/" + userName+ "/game/private",function(frame)
         {
             
             let message = JSON.parse(frame.body);
@@ -85,12 +85,12 @@ function addEventListenerToAllButtons()
                     
                     let symbol = "O";
                     if(chanceX){
-                        updateMark(index,'X');
+                        // updateMark(index,'X');
                         symbol = "X"
                     }
                     else
                     {
-                        updateMark(index,'O');
+                        // updateMark(index,'O');
                     }
                     // send the changes into server using socket connection
                     
