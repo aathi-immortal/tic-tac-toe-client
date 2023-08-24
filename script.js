@@ -65,6 +65,8 @@ function updateMark(index, mark) {
     const tileDiv = buttons[index].querySelector("div");
     
     tileDiv.textContent = mark;
+    chanceX = !chanceX;
+    this.isEmptybox = false;
      // Update the text content
      
 }
@@ -95,8 +97,7 @@ function addEventListenerToAllButtons()
                     // send the changes into server using socket connection
                     
                     sendMessage(symbol,index);
-                    chanceX = !chanceX;
-                    this.isEmptybox = false;
+                    
                 }
             });
             button.addEventListener("mouseenter",function()
