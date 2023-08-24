@@ -2,10 +2,13 @@ let buttons = new Array();
 let id_prefix = "tile-";
 let chanceX = true;
 let isEmptybox = true
-
+let userName;
+let receiverName;
 let stomp = null;
+let submitButton = document.getElementById("submit-button");
+
 document.addEventListener("DOMContentLoaded", function () {
-    connect();
+    
     loadTheButtons();
     addEventListenerToAllButtons();
     
@@ -14,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function connect()
 {
     const socket = new SockJS("https://tic-toe123.azurewebsites.net/game");
+
+    // const socket = new SockJS("http://localhost:8080/game");
     stomp = Stomp.over(socket);
     stomp.connect({},function(frame)
     {
@@ -29,6 +34,17 @@ function connect()
             updateMark(blockId,symbol);
             
         });
+
+        // private
+        stomp.subscribe("/user/" + receiverName+ "/game/private",function(frame)
+        {
+            
+            let message = JSON.parse(frame.body);
+            let symbol = message.messageContent;
+            let blockId = message.bodyId;
+            updateMark(blockId,symbol);
+            
+        });
     });
 }
 
@@ -36,11 +52,13 @@ function sendMessage(symbol,id)
 {
     let movesOb = 
     {
+        sender: userName,
+        receiver:receiverName,
         bodyId:id,
         messageContent: symbol
 
     }
-    stomp.send("/app/move",{},JSON.stringify(movesOb));
+    stomp.send("/app/privateMove",{},JSON.stringify(movesOb));
 }
 function updateMark(index, mark) {
     
@@ -125,6 +143,15 @@ function addEventListenerToAllButtons()
                     
             });
         })
+        submitButton.addEventListener("click",function ()
+        {
+            
+            userName = document.getElementById("user-name").value;
+            receiverName = document.getElementById("opp-name").value;
+            console.log(userName);
+            console.log(receiverName);
+            connect();
+        });      
     
 }
 function loadTheButtons()
